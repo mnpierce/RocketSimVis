@@ -555,6 +555,20 @@ class QRSVGLWidget(QtOpenGL.QGLWidget):
         if state.recv_interval > 0:
             ui_text += "Network rate: {:.2f}fps".format(1 / state.recv_interval) + "\n"
         ui_text += "Ball speed: {:.2f}kph".format(state.ball_state.prev_vel.length * (9 / 250)) + "\n"
+        
+        if state.rewards:
+            ui_text += "\nRewards:\n"
+            # Sort by agent ID to keep display consistent
+            for agent_id in sorted(state.rewards.keys()):
+                breakdown = state.rewards[agent_id]
+                total_reward = sum(breakdown.values())
+                ui_text += f"Agent {agent_id} (Total: {total_reward:+.2f}):\n"
+                
+                # Sort breakdown by name
+                for name in sorted(breakdown.keys()):
+                    val = breakdown[name]
+                    ui_text += f"  {name}: {val:+.2f}\n"
+
         get_ui().set_text(ui_text)
 
         ###########################################

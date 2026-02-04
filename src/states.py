@@ -214,6 +214,7 @@ class GameState:
         self.recv_interval = -1
 
         self.gamemode = None
+        self.rewards = {}
         self.render_state = RenderState()
 
     def is_boost_big(self, idx):
@@ -254,6 +255,11 @@ class GameState:
             self.gamemode = j["gamemode"].lower()
         else:
             self.gamemode = "soccar"
+
+        if not (j.get("rewards") is None):
+            self.rewards = j["rewards"]
+        else:
+            self.rewards = {}
 
         self.render_state = RenderState()
         if not (j.get("render") is None):

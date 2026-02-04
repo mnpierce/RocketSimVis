@@ -140,7 +140,7 @@ class QEditConfigWidget(QWidget):
         super().update()
 
 class QUIBarWidget(QWidget):
-    SIZE = (150, 100)
+    SIZE = (200, 350)
 
     def __init__(self, parent_window):
         QWidget.__init__(self)
